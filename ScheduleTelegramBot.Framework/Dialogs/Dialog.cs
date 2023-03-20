@@ -43,7 +43,7 @@ namespace ScheduleTelegramBot.Framework.Dialogs
 
         private async Task ExecuteCurrentStepAsync()
         {
-            var executor = _factory.Create(ExecutorsTypes[_currentIndex], ExecutorContext);
+            var executor = _factory.Create(ExecutorsTypes[_currentIndex]);
 
             if (executor is DialogStepExecutor step)
                 step.DialogContext = DialogContext;

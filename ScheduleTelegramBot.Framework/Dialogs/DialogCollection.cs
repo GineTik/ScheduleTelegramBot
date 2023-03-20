@@ -4,11 +4,13 @@ namespace ScheduleTelegramBot.Framework.Dialogs
 {
     public class DialogCollection
     {
-        private Dictionary<long, Executor> _activeDialogs;
+        private Dictionary<long, Dialog> _activeDialogs;
+        private readonly ExecutorContextAccessor _accessor;
 
-        public DialogCollection()
+        public DialogCollection(ExecutorContextAccessor accessor)
         {
             _activeDialogs = new();
+            _accessor = accessor;
         }
 
         public void Add(long chatId, Dialog executor)
@@ -25,13 +27,13 @@ namespace ScheduleTelegramBot.Framework.Dialogs
             _activeDialogs.Remove(chatId);
         }
 
-        public Executor? TryGet(long chatId, ExecutorContext newContext)
+        public Dialog? TryGet(long chatId)
         {
-            _activeDialogs.TryGetValue(chatId, out Executor? executor);
+            _activeDialogs.TryGetValue(chatId, out Dialog? executor);
             
             if (executor != null)
-                executor.ExecutorContext = newContext;
-            // TODO: створювати новий екземпляр діалогу, а інформацію про діалог можна хранити в спеціальному класі (де буде індекс та тип наприклад)
+                executor.ExecutorContext = _accessor.ExecutorContext;
+
             return executor;
         }
     }

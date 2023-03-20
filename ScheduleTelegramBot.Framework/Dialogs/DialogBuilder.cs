@@ -10,12 +10,14 @@ namespace ScheduleTelegramBot.Framework.Dialogs
         private readonly List<Type> _stepsTypes;
         private readonly IExecutorFactory _factory;
         private readonly DialogCollection _dialogCollection;
+        private readonly ExecutorContextAccessor _accessor;
 
-        public DialogBuilder(IExecutorFactory factory, DialogCollection dialogCollection)
+        public DialogBuilder(IExecutorFactory factory, DialogCollection dialogCollection, ExecutorContextAccessor accessor)
         {
             _stepsTypes = new();
             _factory = factory;
             _dialogCollection = dialogCollection;
+            _accessor = accessor;
         }
 
         public void AddStep<TStep>()
@@ -24,15 +26,15 @@ namespace ScheduleTelegramBot.Framework.Dialogs
             _stepsTypes.Add(typeof(TStep));
         }
 
-        public Dialog BuildDialog(ExecutorContext context)
+        public Dialog BuildDialog()
         {
-            var dialog = (Dialog)_factory.Create(typeof(Dialog), context);
+            var dialog = _factory.Create<Dialog>();
             
             dialog.ExecutorsTypes = _stepsTypes;
             dialog.DialogEndedAction += _dialogCollection.Remove;
             dialog.DialogEndedAction += _ => DialogEndedAction?.Invoke();
 
-            _dialogCollection.Add(context.ChatId, dialog);
+            _dialogCollection.Add(_accessor.ExecutorContext.ChatId, dialog);
             return dialog;
         }
     }

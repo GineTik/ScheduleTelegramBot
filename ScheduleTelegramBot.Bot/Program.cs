@@ -13,6 +13,7 @@ namespace ScheduleTelegramBot.Bot
             builder.Services.AddDialogs();
 
             var middleware = builder.Build();
+            middleware.Use<ExecutorContextAccessorMiddleware>();
             middleware.Use<TargetExecutorMiddleware>();
             middleware.Use<DialogMiddleware>();
 

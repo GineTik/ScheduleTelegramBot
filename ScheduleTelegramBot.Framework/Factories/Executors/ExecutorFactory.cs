@@ -1,33 +1,29 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ScheduleTelegramBot.Framework.Executors;
-using Telegram.Bot;
-using Telegram.Bot.Types;
 
 namespace ScheduleTelegramBot.Framework.Factories.Executors
 {
     public class ExecutorFactory : IExecutorFactory
     {
         private readonly IServiceProvider _provider;
+        private readonly ExecutorContextAccessor _accessor;
 
-        public ExecutorFactory(IServiceProvider provider)
+        public ExecutorFactory(IServiceProvider provider, ExecutorContextAccessor accessor)
         {
             _provider = provider;
+            _accessor = accessor;
         }
 
-        public Executor Create(Type type, ITelegramBotClient client, Update udpate)
+        public Executor Create(Type type)
         {
             var executor = (Executor)_provider.GetRequiredService(type);
-            executor.ExecutorContext = new()
-            {
-                Client = client,
-                Update = udpate
-            };
+            executor.ExecutorContext = _accessor.ExecutorContext;
             return executor;
         }
 
-        public Executor Create(Type type, ExecutorContext context)
+        public T Create<T>() where T : Executor
         {
-            return Create(type, context.Client, context.Update);
+            return (T)Create(typeof(T));
         }
     }
 }

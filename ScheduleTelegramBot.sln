@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleTelegramBot.Bot", "ScheduleTelegramBot.Bot\ScheduleTelegramBot.Bot.csproj", "{4CEDFA82-6829-445B-94E8-CD00E644876C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleTelegramBot.Bot", "ScheduleTelegramBot.Bot\ScheduleTelegramBot.Bot.csproj", "{4CEDFA82-6829-445B-94E8-CD00E644876C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleTelegramBot.Framework", "ScheduleTelegramBot.Framework\ScheduleTelegramBot.Framework.csproj", "{7EDFBA18-FFB7-41A8-B394-6247EDB0F75C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleTelegramBot.Framework", "ScheduleTelegramBot.Framework\ScheduleTelegramBot.Framework.csproj", "{7EDFBA18-FFB7-41A8-B394-6247EDB0F75C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleTelegramBot.Core", "ScheduleTelegramBot.Core\ScheduleTelegramBot.Core.csproj", "{1D58E07D-F6A4-45F4-81C3-0CCFE1668850}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7EDFBA18-FFB7-41A8-B394-6247EDB0F75C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EDFBA18-FFB7-41A8-B394-6247EDB0F75C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EDFBA18-FFB7-41A8-B394-6247EDB0F75C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D58E07D-F6A4-45F4-81C3-0CCFE1668850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D58E07D-F6A4-45F4-81C3-0CCFE1668850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D58E07D-F6A4-45F4-81C3-0CCFE1668850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D58E07D-F6A4-45F4-81C3-0CCFE1668850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

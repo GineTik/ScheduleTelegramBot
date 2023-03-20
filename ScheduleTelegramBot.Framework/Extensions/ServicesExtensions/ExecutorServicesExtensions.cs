@@ -16,6 +16,7 @@ namespace ScheduleTelegramBot.Framework.Extensions.ServicesExtensions
                 services.AddTransient(type);
 
             services.AddTransient<IExecutorFactory, ExecutorFactory>();
+            services.AddSingleton<ExecutorContextAccessor>();
         }
     }
 }
