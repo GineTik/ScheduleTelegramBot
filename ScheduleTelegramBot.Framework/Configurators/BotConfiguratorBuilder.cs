@@ -6,11 +6,11 @@ namespace ScheduleTelegramBot.Framework.Configurators
 {
     public class BotConfiguratorBuilder
     {
-        public ServiceCollection Services { get; }
+        public IServiceCollection Services { get; }
 
         public BotConfiguratorBuilder()
         {
-            Services = new();
+            Services = new ServiceCollection();
         }
 
         public BotConfigurator Build()

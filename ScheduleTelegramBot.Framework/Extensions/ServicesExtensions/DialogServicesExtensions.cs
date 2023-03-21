@@ -6,7 +6,7 @@ namespace ScheduleTelegramBot.Framework.Extensions.ServicesExtensions
 {
     public static class DialogServicesExtensions
     {
-        public static void AddDialogs(this ServiceCollection services)
+        public static void AddDialogs(this IServiceCollection services)
         {
             var types = DialogHelper.GetDialogStepExecutors();
 

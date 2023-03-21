@@ -7,7 +7,7 @@ namespace ScheduleTelegramBot.Framework.Extensions.ServicesExtensions
 {
     public static class ExecutorServicesExtensions
     {
-        public static void AddExecutors(this ServiceCollection services)
+        public static void AddExecutors(this IServiceCollection services)
         {
             var types = Assembly.GetEntryAssembly().GetTypes()
                 .Where(t => t.BaseType == typeof(Executor));

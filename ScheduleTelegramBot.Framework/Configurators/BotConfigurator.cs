@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ScheduleTelegramBot.Framework.Middlewares;
-using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
