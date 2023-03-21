@@ -31,7 +31,6 @@ namespace ScheduleTelegramBot.Framework.Dialogs
             var dialog = _factory.Create<Dialog>();
             
             dialog.ExecutorsTypes = _stepsTypes;
-            dialog.DialogEndedAction += _dialogCollection.Remove;
             dialog.DialogEndedAction += _ => DialogEndedAction?.Invoke();
 
             _dialogCollection.Add(_accessor.ExecutorContext.ChatId, dialog);

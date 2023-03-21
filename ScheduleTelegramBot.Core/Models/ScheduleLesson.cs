@@ -2,7 +2,7 @@
 
 namespace ScheduleTelegramBot.Core.Models
 {
-    public class Lesson
+    public class ScheduleLesson
     {
         public Guid Id { get; set; }
 
@@ -18,8 +18,5 @@ namespace ScheduleTelegramBot.Core.Models
 
         public Guid TeacherId { get; set; }
         public Teacher Teacher { get; set; }
-
-        public Guid GroupId { get; set; }
-        public Group Group { get; set; }
     }
 }
