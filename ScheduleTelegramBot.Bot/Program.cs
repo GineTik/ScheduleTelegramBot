@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using ScheduleTelegramBot.Data.EF;
+﻿using ScheduleTelegramBot.Bot.Extensions.ServicesExtensions;
 using ScheduleTelegramBot.Framework.Configurators;
 using ScheduleTelegramBot.Framework.Extensions.ServicesExtensions;
 using ScheduleTelegramBot.Framework.Middlewares.Implemetations;
@@ -15,8 +13,7 @@ namespace ScheduleTelegramBot.Bot
             var builder = new BotConfiguratorBuilder();
             builder.Services.AddExecutors();
             builder.Services.AddDialogs();
-            builder.Services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
+            builder.Services.AddDbContextAndRepositories();
 
             var middleware = builder.Build();
             middleware.Use<ExecutorContextAccessorMiddleware>();
