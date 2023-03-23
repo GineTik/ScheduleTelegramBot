@@ -2,7 +2,7 @@
 
 namespace ScheduleTelegramBot.Core.DTOs.ScheduleDTOs
 {
-    public class FullScheduleDTO : ShortScheduleDTO
+    public class ScheduleWithWeeksDTO : ShortInfoScheduleDTO
     {
         public IEnumerable<ShortScheduleWeekDTO> Weeks { get; set; }
     }
