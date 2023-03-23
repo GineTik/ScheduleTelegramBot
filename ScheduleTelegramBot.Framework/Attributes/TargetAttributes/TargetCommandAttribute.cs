@@ -16,7 +16,11 @@ namespace ScheduleTelegramBot.Framework.Attributes.TargetAttributes
 
         public override bool IsTarget(Update update)
         {
-            string[] targetText = update.Message.Text.Split(' ');
+            string[]? targetText = update.Message?.Text?.Split(' ');
+
+            if (targetText == null)
+                return false;
+
             string command = targetText[0];
 
             return command == TargetCommand;

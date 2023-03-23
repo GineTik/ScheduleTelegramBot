@@ -13,12 +13,14 @@ namespace ScheduleTelegramBot.Bot
             var builder = new BotConfiguratorBuilder();
             builder.Services.AddExecutors();
             builder.Services.AddDialogs();
+            builder.Services.AddButtons();
             builder.Services.AddDbContextAndRepositories();
 
             var middleware = builder.Build();
             middleware.Use<ExecutorContextAccessorMiddleware>();
             middleware.Use<TargetExecutorMiddleware>();
             middleware.Use<DialogMiddleware>();
+            middleware.Use<ButtonMiddleware>();
 
             middleware.Run(ConfigurationManager.AppSettings.Get("TelegramBotToken"));
         }
