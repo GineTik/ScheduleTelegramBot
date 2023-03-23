@@ -1,8 +1,7 @@
 ﻿namespace ScheduleTelegramBot.Core.Models
 {
-    public class ScheduleDay
+    public class ScheduleDay : BaseModel
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public ICollection<ScheduleLesson> Lessons { get; set; }
     }
