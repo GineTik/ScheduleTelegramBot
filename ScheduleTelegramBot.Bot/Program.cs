@@ -1,8 +1,8 @@
-﻿using ScheduleTelegramBot.Bot.Extensions.ServicesExtensions;
+﻿using Microsoft.Extensions.Configuration;
+using ScheduleTelegramBot.Bot.Extensions.ServicesExtensions;
 using ScheduleTelegramBot.Framework.Configurators;
 using ScheduleTelegramBot.Framework.Extensions.ServicesExtensions;
 using ScheduleTelegramBot.Framework.Middlewares.Implemetations;
-using System.Configuration;
 
 namespace ScheduleTelegramBot.Bot
 {
@@ -14,7 +14,8 @@ namespace ScheduleTelegramBot.Bot
             builder.Services.AddExecutors();
             builder.Services.AddDialogs();
             builder.Services.AddButtons();
-            builder.Services.AddDbContextAndRepositories();
+            builder.Services.AddDbContextAndRepositories(
+                builder.Configuration.GetConnectionString("DefaultConnection"));
 
             var middleware = builder.Build();
             middleware.Use<ExecutorContextAccessorMiddleware>();
@@ -22,7 +23,7 @@ namespace ScheduleTelegramBot.Bot
             middleware.Use<DialogMiddleware>();
             middleware.Use<ButtonMiddleware>();
 
-            middleware.Run(ConfigurationManager.AppSettings.Get("TelegramBotToken"));
+            middleware.Run(builder.Configuration.GetRequiredSection("Telegram:Token").Value);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace ScheduleTelegramBot.BussinessLogic.Services.Interfaces
 {
     public interface IScheduleService
     {
-        Task<bool> AddSchedule(AddScheduleDTO dto);
-        Task<ScheduleWithWeeksDTO> GetSchedule(Guid id);
+        Task<bool> AddScheduleAsync(AddScheduleDTO dto);
+        Task<ScheduleWithWeeksDTO?> GetScheduleAsync(Guid id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using System.Configuration;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace ScheduleTelegramBot.Data.EF
 {
@@ -8,8 +9,13 @@ namespace ScheduleTelegramBot.Data.EF
     {
         public DataContext CreateDbContext(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.Combine(Assembly.GetCallingAssembly().Location, "../../../../")) // finds the way to the input project
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             var optionsBuilder = new DbContextOptionsBuilder<DataContext>();
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 
             return new DataContext(optionsBuilder.Options);
         }

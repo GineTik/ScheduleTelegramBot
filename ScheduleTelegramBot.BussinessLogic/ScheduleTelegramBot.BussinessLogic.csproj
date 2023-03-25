@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleTelegramBot.Core\ScheduleTelegramBot.Core.csproj" />
+    <ProjectReference Include="..\ScheduleTelegramBot.Data\ScheduleTelegramBot.Data.csproj" />
   </ItemGroup>
 
 </Project>

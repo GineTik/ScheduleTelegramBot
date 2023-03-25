@@ -2,16 +2,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using ScheduleTelegramBot.Data.EF;
 using ScheduleTelegramBot.Data.Repositories;
-using System.Configuration;
 
 namespace ScheduleTelegramBot.Bot.Extensions.ServicesExtensions
 {
     public static class AddDbExtension
     {
-        public static void AddDbContextAndRepositories(this IServiceCollection services)
+        public static void AddDbContextAndRepositories(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString));
+                options.UseSqlServer(connectionString));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }

@@ -22,10 +22,5 @@ namespace ScheduleTelegramBot.Data.EF
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         { }
-
-        //protected internal virtual void OnConfiguring(DbContextOptionsBuilder builder)
-        //{
-
-        //}
     }
 }
