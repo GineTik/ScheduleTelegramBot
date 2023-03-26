@@ -23,11 +23,6 @@ namespace ScheduleTelegramBot.Framework.Middlewares.Implemetations
 
             if (executorType != null)
             {
-                _accessor.ExecutorContext = new ExecutorContext
-                {
-                    Client = client,
-                    Update = update,
-                };
                 var executor = _factory.Create(executorType);
                 await executor.ExecuteAsync();
             }
