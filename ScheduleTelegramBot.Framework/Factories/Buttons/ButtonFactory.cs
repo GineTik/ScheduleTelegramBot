@@ -7,7 +7,7 @@ namespace ScheduleTelegramBot.Framework.Factories.Buttons
     {
         public InlineKeyboardButton Create(string text)
         {
-            return new InlineKeyboardButton(text);
+            return InlineKeyboardButton.WithCallbackData(text);
         }
 
         public InlineKeyboardButton Create<TExecutor>(string text)

@@ -19,7 +19,7 @@ namespace ScheduleTelegramBot.Framework.Attributes.BuildExecutorAttributes
             for (int i = 0; i < ParametersNames.Length; i++)
                 executor.Parameters.Add(
                     ParametersNames[i], 
-                    parameters?.ElementAtOrDefault(i + 1) ?? "");
+                    parameters?.ElementAtOrDefault(i + 1));
         }
     }
 }

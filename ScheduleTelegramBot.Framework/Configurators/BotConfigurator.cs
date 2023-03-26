@@ -9,6 +9,7 @@ namespace ScheduleTelegramBot.Framework.Configurators
     {
         private readonly IServiceProvider _provider;
 
+        private List<Type> _middlewaresTypes;
         private List<Middleware> _middlewares;
         private int _index;
 
@@ -16,13 +17,16 @@ namespace ScheduleTelegramBot.Framework.Configurators
         {
             _provider = provider;
             _middlewares = new();
+            _middlewaresTypes = new();
         }
 
         public BotConfigurator Use<TMiddleware>()
             where TMiddleware : Middleware
         {
-            var middleware = _provider.GetRequiredService<TMiddleware>();
-            _middlewares.Add(middleware);
+            _middlewaresTypes.Add(typeof(TMiddleware));
+
+            //var middleware = _provider.GetRequiredService<TMiddleware>();
+            //_middlewares.Add(middleware);
             return this;
         }
 
@@ -36,7 +40,12 @@ namespace ScheduleTelegramBot.Framework.Configurators
         private async Task Update(ITelegramBotClient client, Update update, CancellationToken token)
         {
             _index = 0;
-            await _middlewares.FirstOrDefault()?.InvokeAsync(client, update, Next(client, update));
+
+            if (_middlewaresTypes.Count == 0)
+                return;
+
+            var first = (Middleware)_provider.GetRequiredService(_middlewaresTypes[0]);
+            await first.InvokeAsync(client, update, Next(client, update));
         }
 
         private async Task Error(ITelegramBotClient client, Exception exception, CancellationToken arg3)
@@ -50,9 +59,10 @@ namespace ScheduleTelegramBot.Framework.Configurators
             {
                 Middleware? next = null;
 
-                if (_index < _middlewares.Count - 1)
+                if (_index < _middlewaresTypes.Count - 1)
                 {
-                    next = _middlewares[++_index];
+                    next = (Middleware)_provider.GetRequiredService(_middlewaresTypes[++_index]);
+                    //next = _middlewares[++_index];
                     await next.InvokeAsync(client, update, Next(client, update));
                 }
             };

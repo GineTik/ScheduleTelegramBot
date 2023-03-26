@@ -20,10 +20,17 @@ namespace ScheduleTelegramBot.Framework.Dialogs
             _accessor = accessor;
         }
 
-        public void AddStep<TStep>()
+        public DialogBuilder AddDialogEndedCallback(Func<Task> dialogEndedAction)
+        {
+            DialogEndedAction += dialogEndedAction;
+            return this;
+        }
+
+        public DialogBuilder AddStep<TStep>()
             where TStep : Executor
         {
             _stepsTypes.Add(typeof(TStep));
+            return this;
         }
 
         public Dialog BuildDialog()

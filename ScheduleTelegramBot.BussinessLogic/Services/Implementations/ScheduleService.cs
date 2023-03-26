@@ -18,7 +18,7 @@ namespace ScheduleTelegramBot.BussinessLogic.Services.Implementations
             _configuration = configuration;
         }
 
-        public async Task<bool> AddScheduleAsync(AddScheduleDTO dto)
+        public async Task<Guid?> AddScheduleAsync(AddScheduleDTO dto)
         {
             var schedule = new Schedule
             {
@@ -33,7 +33,8 @@ namespace ScheduleTelegramBot.BussinessLogic.Services.Implementations
                 }
             };
 
-            return await _unitOfWork.ScheduleRepository.AddAsync(schedule);
+            var result = await _unitOfWork.ScheduleRepository.AddAsync(schedule);
+            return result ? schedule.Id : null;
         }
 
         public async Task<ScheduleWithWeeksDTO?> GetScheduleAsync(Guid id)
@@ -43,11 +44,13 @@ namespace ScheduleTelegramBot.BussinessLogic.Services.Implementations
             if (schedule == null)
                 return null;
 
+            var weeks = await _unitOfWork.ScheduleWeekRepository.GetScheduleWeeksAsync(schedule.Id);
+
             return new ScheduleWithWeeksDTO
             {
                 Id = schedule.Id,
                 Name = schedule.Name,
-                Weeks = schedule.Weeks.Select(w => new ShortScheduleWeekDTO
+                Weeks = weeks.Select(w => new ShortScheduleWeekDTO
                 {
                     Id = w.Id,
                     Name = w.Name,

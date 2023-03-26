@@ -8,5 +8,10 @@ namespace ScheduleTelegramBot.Data.Repositories.Implements
     {
         public ScheduleWeekRepository(DataContext context) : base(context)
         { }
+
+        public async Task<IEnumerable<ScheduleWeek>> GetScheduleWeeksAsync(Guid scheduleId)
+        {
+            return await Task.Run(() => _context.ScheduleWeeks.Where(x => x.ScheduleId == scheduleId));
+        }
     }
 }

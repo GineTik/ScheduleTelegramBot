@@ -12,13 +12,6 @@ namespace ScheduleTelegramBot.Data.EF
         public DbSet<ScheduleDay> ScheduleDays { get; set; }
         public DbSet<ScheduleLesson> ScheduleLessons { get; set; }
 
-        public IConfiguration _configuration;
-
-        public DataContext(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         { }

@@ -8,6 +8,11 @@ namespace ScheduleTelegramBot.Data.Repositories
     {
         private readonly DataContext _context;
 
+        public UnitOfWork(DataContext context)
+        {
+            _context = context;
+        }
+
         public IScheduleRepository ScheduleRepository => new ScheduleRepository(_context);
         public IScheduleWeekRepository ScheduleWeekRepository => new ScheduleWeekRepository(_context);
         public IScheduleDayRepository ScheduleDayRepository => new ScheduleDayRepository(_context);
